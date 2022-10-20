@@ -15,7 +15,7 @@ namespace IniView
 
         private void IniLoad()
         {
-            edtIniDir.Text = ini.IniReadValue("Last", "IniDir");
+            edtIniDir.Text = ini.IniReadValue("Last", "IniDir");  // 최근 사용 경로 불러오기
         }
 
 
@@ -67,7 +67,11 @@ namespace IniView
             string m_strWorkSpacePath;
             string m_dlStream;
 
+            dataGridView1.Rows.Clear();
+
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(edtIniDir.Text);
+
+
 
             foreach (var filename in di.GetFiles())
             {
