@@ -5,7 +5,7 @@ namespace IniView
 {
     public partial class IniView_F1 : Form
     {
-        private IniFile ini = new IniFile("./setup.ini");
+        private IniFile ini = new IniFile("./setup.ini");  // 최근 사용경로를 저장할 ini파일
 
         public IniView_F1()
         {
@@ -18,17 +18,16 @@ namespace IniView
             edtIniDir.Text = ini.IniReadValue("Last", "IniDir");  // 최근 사용 경로 불러오기
         }
 
-
         private void btnIniDir_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 edtIniDir.Text = folderBrowserDialog1.SelectedPath;
-                ini.IniWriteValue("Last", "iniDir", edtIniDir.Text);
+                ini.IniWriteValue("Last", "iniDir", edtIniDir.Text);  // 최근 사용 경로 저장
             }
         }
 
-
+        // 클릭시 edit창으로 값 가져오기
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             edtFilename.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -40,6 +39,7 @@ namespace IniView
             edtStream.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
         }
 
+        // Ini파일 저장
         private void btnIniSave_Click(object sender, EventArgs e)
         {
             string sFilename;
@@ -54,37 +54,36 @@ namespace IniView
             iniSave.IniWriteValue("VPDL", "m_strWorkSpacePath", edtWorkspace.Text);
             iniSave.IniWriteValue("VPDL", "m_dlStream", edtStream.Text);
 
+            // 저장 후 갱신하기 위해 Clear하고 다시 불러오기
             dataGridView1.Rows.Clear();
             btnIniLoad_Click(sender, e);
-
         }
 
+        // 폴더내 ini 파일 불러오기
         private void btnIniLoad_Click(object sender, EventArgs e)
         {
             string sFilename;
-            string m_dlExposure1, m_dlExposure2;
-            string m_dlChannel1, m_dlChannel2;
-            string m_strWorkSpacePath;
-            string m_dlStream;
+            string sExposure1, sExposure2;
+            string sChannel1, sChannel2;
+            string sWorkSpacePath;
+            string sStream;
 
-            dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear(); // Grid Clear
 
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(edtIniDir.Text);
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(edtIniDir.Text);  // 폴더내 파일정보
 
-
-
-            foreach (var filename in di.GetFiles())
+            foreach (var filename in di.GetFiles())  // ini파일 하나씩 읽어와서 Grid에 내용 추가
             {
                 sFilename = di.FullName + "\\" + filename;
                 IniFile iniView = new IniFile(sFilename);
-                m_dlExposure1 = iniView.IniReadValue("Camera", "m_dlExposure1");
-                m_dlExposure2 = iniView.IniReadValue("Camera", "m_dlExposure2");
-                m_dlChannel1 = iniView.IniReadValue("Light", "m_dlChannel1");
-                m_dlChannel2 = iniView.IniReadValue("Light", "m_dlChannel2");
-                m_strWorkSpacePath = iniView.IniReadValue("VPDL", "m_strWorkSpacePath");
-                m_dlStream = iniView.IniReadValue("VPDL", "m_dlStream");
+                sExposure1 = iniView.IniReadValue("Camera", "m_dlExposure1");
+                sExposure2 = iniView.IniReadValue("Camera", "m_dlExposure2");
+                sChannel1 = iniView.IniReadValue("Light", "m_dlChannel1");
+                sChannel2 = iniView.IniReadValue("Light", "m_dlChannel2");
+                sWorkSpacePath = iniView.IniReadValue("VPDL", "m_strWorkSpacePath");
+                sStream = iniView.IniReadValue("VPDL", "m_dlStream");
 
-                dataGridView1.Rows.Add(filename, m_dlExposure1, m_dlExposure2, m_dlChannel1, m_dlChannel2, m_strWorkSpacePath, m_dlStream);
+                dataGridView1.Rows.Add(filename, sExposure1, sExposure2, sChannel1, sChannel2, sWorkSpacePath, sStream);
             }
         }
     }
