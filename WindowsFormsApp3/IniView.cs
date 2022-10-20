@@ -5,17 +5,17 @@ namespace IniView
 {
     public partial class IniView_F1 : Form
     {
-        private IniFile ini = new IniFile("./setup.ini");  // 최근 사용경로를 저장할 ini파일
+        private IniFile iniSetup = new IniFile("./setup.ini");  // 최근 사용경로를 저장할 ini파일
 
         public IniView_F1()
         {
             InitializeComponent();
-            IniLoad();   // ini 파일 정보 불러오기
+            IniSetupLoad();   // ini 파일 정보 불러오기
         }
 
-        private void IniLoad()
+        private void IniSetupLoad()
         {
-            edtIniDir.Text = ini.IniReadValue("Last", "IniDir");  // 최근 사용 경로 불러오기
+            edtIniDir.Text = iniSetup.IniReadValue("Last", "IniDir");  // 최근 사용 경로 불러오기
         }
 
         private void btnIniDir_Click(object sender, EventArgs e)
@@ -23,7 +23,7 @@ namespace IniView
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 edtIniDir.Text = folderBrowserDialog1.SelectedPath;
-                ini.IniWriteValue("Last", "iniDir", edtIniDir.Text);  // 최근 사용 경로 저장
+                iniSetup.IniWriteValue("Last", "iniDir", edtIniDir.Text);  // 최근 사용 경로 저장
             }
         }
 
@@ -42,9 +42,7 @@ namespace IniView
         // Ini파일 저장
         private void btnIniSave_Click(object sender, EventArgs e)
         {
-            string sFilename;
-
-            sFilename = edtIniDir.Text + "\\" + edtFilename.Text;
+            string sFilename = edtIniDir.Text + "\\" + edtFilename.Text;
             IniFile iniSave = new IniFile(sFilename);
 
             iniSave.IniWriteValue("Camera", "m_dlExposure1", edtExposure1.Text);
@@ -69,19 +67,18 @@ namespace IniView
             string sStream;
 
             dataGridView1.Rows.Clear(); // Grid Clear
-
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(edtIniDir.Text);  // 폴더내 파일정보
-
             foreach (var filename in di.GetFiles())  // ini파일 하나씩 읽어와서 Grid에 내용 추가
             {
                 sFilename = di.FullName + "\\" + filename;
-                IniFile iniView = new IniFile(sFilename);
-                sExposure1 = iniView.IniReadValue("Camera", "m_dlExposure1");
-                sExposure2 = iniView.IniReadValue("Camera", "m_dlExposure2");
-                sChannel1 = iniView.IniReadValue("Light", "m_dlChannel1");
-                sChannel2 = iniView.IniReadValue("Light", "m_dlChannel2");
-                sWorkSpacePath = iniView.IniReadValue("VPDL", "m_strWorkSpacePath");
-                sStream = iniView.IniReadValue("VPDL", "m_dlStream");
+                IniFile iniLoad = new IniFile(sFilename);
+
+                sExposure1 = iniLoad.IniReadValue("Camera", "m_dlExposure1");
+                sExposure2 = iniLoad.IniReadValue("Camera", "m_dlExposure2");
+                sChannel1 = iniLoad.IniReadValue("Light", "m_dlChannel1");
+                sChannel2 = iniLoad.IniReadValue("Light", "m_dlChannel2");
+                sWorkSpacePath = iniLoad.IniReadValue("VPDL", "m_strWorkSpacePath");
+                sStream = iniLoad.IniReadValue("VPDL", "m_dlStream");
 
                 dataGridView1.Rows.Add(filename, sExposure1, sExposure2, sChannel1, sChannel2, sWorkSpacePath, sStream);
             }
