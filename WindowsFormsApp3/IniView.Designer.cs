@@ -59,11 +59,14 @@
             this.edtStream = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnIniSave = new System.Windows.Forms.Button();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAllSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -195,7 +198,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnIniSave, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 38);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -373,13 +376,40 @@
             // btnIniSave
             // 
             this.btnIniSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnIniSave.Location = new System.Drawing.Point(883, 3);
+            this.btnIniSave.Location = new System.Drawing.Point(3, 3);
             this.btnIniSave.Name = "btnIniSave";
-            this.btnIniSave.Size = new System.Drawing.Size(92, 48);
+            this.btnIniSave.Size = new System.Drawing.Size(92, 21);
             this.btnIniSave.TabIndex = 1;
             this.btnIniSave.Text = "ini Save";
             this.btnIniSave.UseVisualStyleBackColor = true;
             this.btnIniSave.Click += new System.EventHandler(this.btnIniSave_Click);
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.btnIniSave, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnAllSave, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(880, 0);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(98, 54);
+            this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // btnAllSave
+            // 
+            this.btnAllSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAllSave.Location = new System.Drawing.Point(3, 30);
+            this.btnAllSave.Name = "btnAllSave";
+            this.btnAllSave.Size = new System.Drawing.Size(92, 21);
+            this.btnAllSave.TabIndex = 1;
+            this.btnAllSave.Text = "All Save";
+            this.btnAllSave.UseVisualStyleBackColor = true;
+            this.btnAllSave.Click += new System.EventHandler(this.btnAllSave_Click);
             // 
             // IniView_F1
             // 
@@ -396,6 +426,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -432,6 +463,8 @@
         private System.Windows.Forms.TextBox edtStream;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnIniSave;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button btnAllSave;
     }
 }
 

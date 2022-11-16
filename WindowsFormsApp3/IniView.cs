@@ -55,9 +55,8 @@ namespace IniView
             // 저장 후 갱신하기 위해 Clear하고 다시 불러오기
             dataGridView1.Rows.Clear();
             btnIniLoad_Click(sender, e);
-        }
 
-        // 폴더내 ini 파일 불러오기
+        }
         private void btnIniLoad_Click(object sender, EventArgs e)
         {
             string sFilename;
@@ -82,6 +81,28 @@ namespace IniView
 
                 dataGridView1.Rows.Add(filename, sExposure1, sExposure2, sChannel1, sChannel2, sWorkSpacePath, sStream);
             }
+        }
+        private void btnAllSave_Click(object sender, EventArgs e)
+        {
+            string sFilename;
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(edtIniDir.Text);
+
+
+            foreach (var a in di.GetFiles())
+            {
+                sFilename = di.FullName + "\\" + a;
+
+                IniFile iniSave = new IniFile(sFilename);
+
+                iniSave.IniWriteValue("Camera", "m_dlExposure1", edtExposure1.Text);
+                iniSave.IniWriteValue("Camera", "m_dlExposure2", edtExposure2.Text);
+                iniSave.IniWriteValue("Light", "m_dlChannel1", edtChannel1.Text);
+                iniSave.IniWriteValue("Light", "m_dlChannel2", edtChannel2.Text);
+                iniSave.IniWriteValue("VPDL", "m_strWorkSpacePath", edtWorkspace.Text);
+                iniSave.IniWriteValue("VPDL", "m_dlStream", edtStream.Text);
+            }
+            dataGridView1.Rows.Clear();
+            btnIniLoad_Click(sender, e);
         }
     }
 }
